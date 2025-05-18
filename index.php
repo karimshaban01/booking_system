@@ -379,10 +379,10 @@
     <header>
         <div class="container">
             <nav>
-                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <a href="" class="logo">Easy<span>Bus</span></a>
                 <div class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/routes">Routes</a>
+                    <a href="">Home</a>
+                    <a href="./pages/route.php">Routes</a>
                     <a href="/offers">Offers</a>
                     <a href="/about">About Us</a>
                     <a href="/contact">Contact</a>
@@ -408,7 +408,7 @@
     <!-- Search Box -->
     <div class="container">
         <div class="search-box">
-            <form class="search-form" action="step1.html">
+            <form class="search-form" action="./pages/buses.php" method="GET">
                 <div class="form-group">
                     <label for="from">From</label>
                     <input type="text" id="from" class="form-control" placeholder="Enter departure city">

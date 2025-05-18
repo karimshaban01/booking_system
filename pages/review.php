@@ -311,7 +311,7 @@
 
         <div class="buttons">
             <a href="/seats" class="btn btn-outline">Back</a>
-            <a href="/payment" class="btn btn-primary">Proceed to Payment</a>
+            <a href="./payment.php" class="btn btn-primary">Proceed to Payment</a>
         </div>
     </div>
 

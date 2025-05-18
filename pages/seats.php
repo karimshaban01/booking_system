@@ -348,7 +348,7 @@
         
         <div class="buttons">
             <a href="/passenger" class="btn btn-outline">Back</a>
-            <a href="/review" class="btn btn-primary">Continue to Review</a>
+            <a href="./review.php" class="btn btn-primary">Continue to Review</a>
         </div>
     </div>
 

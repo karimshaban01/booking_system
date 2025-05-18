@@ -365,7 +365,8 @@
 
         <div class="buttons">
             <a href="/review" class="btn btn-outline">Back</a>
-            <button type="submit" class="btn btn-primary">Pay $95.00</button>
+            <a href="./confirmation.php" class="btn btn-primary">Pay $95.00</a>
+            <!-- <button type="submit" class="btn btn-primary"></button> -->
         </div>
     </div>
 

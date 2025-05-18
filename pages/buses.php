@@ -137,7 +137,7 @@
                 </div>
                 <div class="price-booking">
                     <div class="price">$45</div>
-                    <button class="btn btn-primary">Select Seats</button>
+                    <a href="./seats.php"><button class="btn btn-primary">Select Seats</button></a>
                 </div>
             </div>
         </div>
