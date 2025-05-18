@@ -3,203 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusConnect - Passenger Information</title>
+    <title>Passenger Information - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem;
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/passenger-hero.jpg") center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: white;
+            margin-bottom: 50px;
         }
+
+        .passenger-container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
         .progress-bar {
             display: flex;
             justify-content: space-between;
-            margin: 1rem auto;
+            margin: 30px auto;
             max-width: 800px;
-            padding: 0 1rem;
         }
+
         .step {
             text-align: center;
             flex: 1;
+            position: relative;
         }
+
         .step-number {
-            background-color: #ddd;
-            color: #777;
-            border-radius: 50%;
             width: 30px;
             height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
             font-weight: bold;
         }
-        .active .step-number {
-            background-color: #0056b3;
+
+        .step.active .step-number {
+            background-color: var(--primary);
             color: white;
         }
-        .completed .step-number {
-            background-color: #28a745;
+
+        .step.completed .step-number {
+            background-color: var(--secondary);
             color: white;
         }
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+
+        .passenger-card {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
         }
-        .form-title {
-            margin-top: 0;
-            color: #0056b3;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-        .passenger-form {
-            margin-bottom: 2rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .passenger-card {
-            background-color: #f9f9f9;
-            border-left: 4px solid #0056b3;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-        }
+
         .passenger-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
         }
-        .btn {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
+
+        .passenger-header h3 {
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-gray);
             border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .required {
+            color: #dc3545;
+            margin-left: 4px;
+        }
+
+        .add-passenger {
+            background-color: var(--light);
+            border: 2px dashed var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            margin: 20px 0;
+            transition: all 0.3s;
         }
-        .btn:hover {
-            background-color: #003d82;
+
+        .add-passenger:hover {
+            border-color: var(--primary);
+            background-color: rgba(26, 115, 232, 0.04);
         }
-        .btn-secondary {
-            background-color: #6c757d;
+
+        .alert {
+            background-color: #e8f0fe;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            color: var(--dark);
         }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
+
         .buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 30px;
         }
-        .required {
-            color: #dc3545;
-        }
-        .add-passenger {
-            background-color: #f8f9fa;
-            border: 2px dashed #ccc;
-            border-radius: 4px;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            margin: 1rem 0;
-            transition: all 0.3s;
-        }
-        .add-passenger:hover {
-            border-color: #0056b3;
-            background-color: #e9ecef;
-        }
-        .alert {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            margin-top: 2rem;
+
+        @media (max-width: 768px) {
+            .passenger-container {
+                margin: 0 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>BusConnect</h1>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    
-    <div class="progress-bar">
-        <div class="step completed">
-            <div class="step-number">1</div>
-            <div class="step-label">Search</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">2</div>
-            <div class="step-label">Select Bus</div>
-        </div>
-        <div class="step active">
-            <div class="step-number">3</div>
-            <div class="step-label">Passenger Info</div>
-        </div>
-        <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-label">Select Seats</div>
-        </div>
-        <div class="step">
-            <div class="step-number">5</div>
-            <div class="step-label">Review</div>
-        </div>
-        <div class="step">
-            <div class="step-number">6</div>
-            <div class="step-label">Payment</div>
-        </div>
-        <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-label">Confirmation</div>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2 class="form-title">Passenger Information</h2>
-        
-        <div class="alert alert-info">
+    <!-- Hero Section -->
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Passenger Information</h1>
+            <p>Please provide details for all passengers</p>
+        </div>
+    </section>
+
+    <!-- Passenger Information Form -->
+    <div class="passenger-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-label">Search</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">2</div>
+                <div class="step-label">Select Bus</div>
+            </div>
+            <div class="step active">
+                <div class="step-number">3</div>
+                <div class="step-label">Passenger Info</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-label">Select Seats</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
+        <div class="alert">
             Please enter the details for all passengers. Make sure the information matches official ID documents.
         </div>
-        
+
+        <!-- Passenger Forms -->
         <div class="passenger-card">
             <div class="passenger-header">
                 <h3>Passenger 1 (Lead Passenger)</h3>
@@ -317,13 +349,46 @@
         </div>
         
         <div class="buttons">
-            <button class="btn btn-secondary">Back</button>
-            <button class="btn">Continue to Seat Selection</button>
+            <a href="/routes" class="btn btn-outline">Back</a>
+            <a href="/seats" class="btn btn-primary">Continue to Seat Selection</a>
         </div>
     </div>
-    
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EasyBus</h3>
+                    <p>Making bus travel simple and comfortable.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/routes">Routes</a></li>
+                        <li><a href="/manage-booking">Manage Booking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="mailto:support@easybus.com">support@easybus.com</a></li>
+                        <li><a href="tel:1800BUSEASY">1-800-BUS-EASY</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EasyBus. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

@@ -3,289 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusConnect - Payment</title>
+    <title>Payment - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem;
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/payment-hero.jpg") center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: white;
+            margin-bottom: 50px;
         }
-        .progress-bar {
+
+        .payment-container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .progress-steps {
             display: flex;
             justify-content: space-between;
-            margin: 1rem auto;
-            max-width: 800px;
-            padding: 0 1rem;
+            margin-bottom: 30px;
         }
+
         .step {
             text-align: center;
             flex: 1;
+            position: relative;
         }
+
         .step-number {
-            background-color: #ddd;
-            color: #777;
-            border-radius: 50%;
             width: 30px;
             height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
             font-weight: bold;
         }
-        .active .step-number {
-            background-color: #0056b3;
+
+        .step.completed .step-number {
+            background-color: var(--secondary);
             color: white;
         }
-        .completed .step-number {
-            background-color: #28a745;
+
+        .step.active .step-number {
+            background-color: var(--primary);
             color: white;
         }
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
+
+        .booking-summary {
+            background-color: var(--light);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
         }
-        .form-title {
-            margin-top: 0;
-            color: #0056b3;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-        .btn {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #003d82;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .btn-success {
-            background-color: #28a745;
-        }
-        .btn-success:hover {
-            background-color: #218838;
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        .card {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #dee2e6;
-        }
-        .card-title {
-            margin-top: 0;
-            color: #0056b3;
-            font-size: 1.25rem;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        .price-summary {
-            margin-top: 1rem;
-        }
+
         .price-row {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
         }
+
         .price-total {
-            border-top: 2px solid #dee2e6;
+            border-top: 2px solid var(--primary);
+            border-bottom: none;
             font-weight: bold;
-            padding-top: 10px;
-            margin-top: 10px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            padding-top: 15px;
         }
+
         .payment-methods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
+
         .payment-method {
-            border: 2px solid #dee2e6;
+            border: 2px solid var(--light-gray);
             border-radius: 8px;
-            padding: 1rem;
-            width: calc(50% - 0.5rem);
+            padding: 20px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
         }
+
         .payment-method:hover {
-            border-color: #adb5bd;
-            background-color: #e9ecef;
+            border-color: var(--primary);
+            background-color: rgba(26, 115, 232, 0.04);
         }
+
         .payment-method.selected {
-            border-color: #0056b3;
+            border-color: var(--primary);
             background-color: #e6f2ff;
         }
-        .payment-icon {
-            width: 50px;
-            height: 30px;
-            background-color: #6c757d;
-            margin-right: 10px;
-            border-radius: 4px;
-        }
-        .payment-form {
-            margin-top: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .card-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+
         .secure-badge {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 1.5rem;
-            color: #28a745;
-            font-weight: 600;
+            gap: 10px;
+            color: var(--secondary);
+            margin: 30px 0;
+            font-weight: 500;
         }
-        .secure-icon {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-        .alert {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-        }
+
         .timer {
+            background-color: #fff8e1;
+            color: var(--primary-dark);
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            margin-bottom: 1.5rem;
-            color: #dc3545;
-            font-weight: bold;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            margin-top: 2rem;
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .card-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                margin: 0 20px;
+            }
+            .card-inputs {
+                grid-template-columns: 1fr;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>BusConnect</h1>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    
-    <div class="progress-bar">
-        <div class="step completed">
-            <div class="step-number">1</div>
-            <div class="step-label">Search</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">2</div>
-            <div class="step-label">Select Bus</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">3</div>
-            <div class="step-label">Passenger Info</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">4</div>
-            <div class="step-label">Select Seats</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">5</div>
-            <div class="step-label">Review</div>
-        </div>
-        <div class="step active">
-            <div class="step-number">6</div>
-            <div class="step-label">Payment</div>
-        </div>
-        <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-label">Confirmation</div>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2 class="form-title">Secure Payment</h2>
-        
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Secure Payment</h1>
+            <p>Complete your booking with our secure payment system</p>
+        </div>
+    </section>
+
+    <div class="payment-container">
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-label">Search</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">2</div>
+                <div class="step-label">Select Bus</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">3</div>
+                <div class="step-label">Passenger Info</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">4</div>
+                <div class="step-label">Select Seats</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">5</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="step active">
+                <div class="step-number">6</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
         <div class="timer">
-            Time remaining to complete payment: 14:59
+            ⏱️ Time remaining to complete payment: <strong>14:59</strong>
         </div>
-        
-        <div class="card">
-            <h3 class="card-title">Booking Summary</h3>
-            <div>
-                <p><strong>Journey:</strong> New York, NY to Boston, MA</p>
-                <p><strong>Date & Time:</strong> May 15, 2025 at 09:30 AM</p>
-                <p><strong>Passengers:</strong> 2 Adults</p>
-                <p><strong>Seats:</strong> 9, 10</p>
+
+        <!-- Booking Summary -->
+        <div class="booking-summary">
+            <h3>Booking Summary</h3>
+            <div class="price-row">
+                <span>Journey</span>
+                <span>New York → Boston</span>
             </div>
-            <div class="price-summary">
-                <div class="price-row">
-                    <span>2 x Standard Seats</span>
-                    <span>$90.00</span>
-                </div>
-                <div class="price-row">
-                    <span>Booking Fee</span>
-                    <span>$5.00</span>
-                </div>
-                <div class="price-row price-total">
-                    <span>Total</span>
-                    <span>$95.00</span>
-                </div>
+            <div class="price-row">
+                <span>Date & Time</span>
+                <span>May 15, 2025 at 09:30 AM</span>
+            </div>
+            <div class="price-row">
+                <span>Passengers</span>
+                <span>2 Adults</span>
+            </div>
+            <div class="price-row">
+                <span>Seats</span>
+                <span>9, 10</span>
+            </div>
+            <div class="price-row">
+                <span>2 x Standard Seats</span>
+                <span>$90.00</span>
+            </div>
+            <div class="price-row">
+                <span>Booking Fee</span>
+                <span>$5.00</span>
+            </div>
+            <div class="price-row price-total">
+                <span>Total</span>
+                <span>$95.00</span>
             </div>
         </div>
-        
-        <h3>Select Payment Method</h3>
-        
+
+        <!-- Payment Methods -->
         <div class="payment-methods">
             <div class="payment-method selected">
                 <div class="payment-icon"></div>
@@ -304,8 +305,9 @@
                 <span>Google Pay</span>
             </div>
         </div>
-        
-        <div class="payment-form">
+
+        <!-- Payment Form -->
+        <form class="payment-form">
             <div class="form-group">
                 <label for="card-number">Card Number</label>
                 <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
@@ -354,25 +356,45 @@
                     <option value="au">Australia</option>
                 </select>
             </div>
-        </div>
-        
+        </form>
+
         <div class="secure-badge">
-            <span class="secure-icon">🔒</span>
+            <span>🔒</span>
             <span>Secure Payment - Your data is encrypted and protected</span>
         </div>
-        
-        <div class="alert alert-info">
-            <strong>Note:</strong> Your booking will be confirmed immediately after successful payment.
-        </div>
-        
+
         <div class="buttons">
-            <button class="btn btn-secondary">Back</button>
-            <button class="btn btn-success">Pay $95.00</button>
+            <a href="/review" class="btn btn-outline">Back</a>
+            <button type="submit" class="btn btn-primary">Pay $95.00</button>
         </div>
     </div>
-    
+
     <footer>
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EasyBus</h3>
+                    <p>Making bus travel simple and comfortable.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <a href="/faq">FAQ</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EasyBus. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

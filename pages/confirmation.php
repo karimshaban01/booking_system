@@ -3,149 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmation - BusConnect</title>
+    <title>Booking Confirmation - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .header {
-            background-color: #0066cc;
-            color: white;
-            padding: 1rem;
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/confirmation-hero.jpg") center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
             text-align: center;
+            color: white;
+            margin-bottom: 50px;
         }
-        
-        .container {
+
+        .confirmation-container {
             max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+            margin: -50px auto 50px;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
         }
-        
+
         .confirmation-banner {
-            background-color: #4CAF50;
+            background-color: var(--secondary);
             color: white;
-            padding: 1rem;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
-        
+
         .booking-details {
-            border: 1px solid #ddd;
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
         }
-        
+
         .detail-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
         }
-        
+
         .detail-row:last-child {
             border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
         }
-        
+
         .label {
-            font-weight: 600;
-            color: #555;
+            color: var(--gray);
+            font-weight: 500;
         }
-        
+
         .value {
-            text-align: right;
-        }
-        
-        .ticket-actions {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-        
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            color: var(--dark);
             font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
         }
-        
-        .btn-primary {
-            background-color: #0066cc;
-            color: white;
+
+        .ticket-actions {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
         }
-        
-        .btn-secondary {
-            background-color: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        
+
         .important-info {
             background-color: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 1rem;
-            margin-top: 2rem;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
         }
-        
-        .footer {
-            text-align: center;
-            padding: 1rem;
-            color: #777;
-            font-size: 0.875rem;
-            margin-top: 2rem;
+
+        .important-info h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
         }
-        
+
+        .important-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .important-info li {
+            margin-bottom: 8px;
+            color: var(--gray);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .important-info li::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-                margin: 1rem;
+            .confirmation-container {
+                margin: 0 20px;
             }
-            
-            .detail-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .value {
-                text-align: left;
-                margin-top: 0.25rem;
-            }
-            
+
             .ticket-actions {
                 flex-direction: column;
             }
-            
-            .btn {
-                width: 100%;
-                margin-bottom: 0.5rem;
+
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .value {
+                padding-left: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>BusConnect</h1>
-    </div>
-    
+    <!-- Standard Header for all pages -->
+<header>
     <div class="container">
+        <nav>
+            <a href="/" class="logo">Easy<span>Bus</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/routes">Routes</a>
+                <a href="/offers">Offers</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                <a href="/auth/register" class="btn btn-primary">Register</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Booking Confirmation</h1>
+            <p>Your journey is confirmed and ready to go!</p>
+        </div>
+    </section>
+
+    <div class="confirmation-container">
         <div class="confirmation-banner">
             <h2>Booking Confirmed!</h2>
             <p>Your ticket has been successfully booked.</p>
@@ -215,6 +219,12 @@
             </div>
         </div>
         
+        <div class="ticket-actions">
+            <a href="#" class="btn btn-primary">Download E-Ticket</a>
+            <a href="#" class="btn btn-outline">Add to Calendar</a>
+            <a href="#" class="btn btn-outline">Manage Booking</a>
+        </div>
+        
         <div class="important-info">
             <h4>Important Information</h4>
             <ul>
@@ -226,12 +236,6 @@
             </ul>
         </div>
         
-        <div class="ticket-actions">
-            <a href="#" class="btn btn-primary">Download E-Ticket</a>
-            <a href="#" class="btn btn-secondary">Manage Booking</a>
-            <a href="#" class="btn btn-secondary">Add to Calendar</a>
-        </div>
-        
         <div class="important-info">
             <h4>Need Help?</h4>
             <p>If you have any questions or need assistance, please contact our customer support:</p>
@@ -241,10 +245,10 @@
         </div>
     </div>
     
-    <div class="footer">
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
-        <p><a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Refund Policy</a></p>
-    </div>
+    <!-- Copy footer from index.php -->
+    <footer>
+        <!-- ...existing footer code... -->
+    </footer>
 
     <script>
         // You could add JavaScript here to:

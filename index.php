@@ -379,17 +379,17 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">Easy<span>Bus</span></a>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
                 <div class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#">Routes</a>
-                    <a href="#">Offers</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
                 </div>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Sign In</a>
-                    <a href="#" class="btn btn-primary">Register</a>
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
                 </div>
             </nav>
         </div>

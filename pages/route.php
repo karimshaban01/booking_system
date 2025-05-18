@@ -3,246 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusConnect - Choose Destination and Date</title>
+    <title>Choose Your Route - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .progress-bar {
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/route-hero.jpg") center/cover;
+            height: 200px;
             display: flex;
-            justify-content: space-between;
-            margin: 1rem auto;
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-        .step {
+            align-items: center;
             text-align: center;
-            flex: 1;
-        }
-        .step-number {
-            background-color: #ddd;
-            color: #777;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
-            font-weight: bold;
-        }
-        .active .step-number {
-            background-color: #0056b3;
             color: white;
+            margin-bottom: 50px;
         }
-        .completed .step-number {
-            background-color: #28a745;
-            color: white;
-        }
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-        }
-        .container {
+
+        .route-container {
             max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+            margin: -50px auto 50px;
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
         }
+
         .form-title {
-            margin-top: 0;
-            color: #0056b3;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
         }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .search-form {
-            margin-bottom: 2rem;
-        }
-        .btn {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #003d82;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .buttons {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 2rem;
-        }
-        .required {
-            color: #dc3545;
-        }
+
         .route-type {
             display: flex;
-            margin-bottom: 1.5rem;
+            margin-bottom: 25px;
+            gap: 20px;
         }
+
         .route-option {
-            margin-right: 20px;
-        }
-        .route-option input {
-            width: auto;
-            margin-right: 5px;
-        }
-        .route-option label {
-            display: inline;
-            font-weight: normal;
-        }
-        .popular-routes {
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-        }
-        .route-cards {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 1rem;
+            align-items: center;
+            gap: 8px;
         }
-        .route-card {
-            border: 1px solid #ddd;
+
+        .route-option input[type="radio"] {
+            width: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-gray);
             border-radius: 4px;
-            padding: 15px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .swap-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 10px;
+            margin: 10px 0;
+            transition: color 0.3s;
+        }
+
+        .swap-btn:hover {
+            color: var(--primary-dark);
+        }
+
+        .date-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .passenger-count {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .popular-routes {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+
+        .route-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .route-card {
             background-color: white;
-            flex: 1 0 calc(33% - 15px);
-            min-width: 200px;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             cursor: pointer;
             transition: all 0.3s;
         }
+
         .route-card:hover {
-            border-color: #0056b3;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+
         .route-title {
-            font-weight: bold;
-            margin-bottom: 5px;
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 8px;
         }
+
         .route-info {
-            color: #6c757d;
+            color: var(--gray);
             font-size: 0.9rem;
         }
-        .date-inputs {
+
+        .required {
+            color: #dc3545;
+            margin-left: 4px;
+        }
+
+        .buttons {
             display: flex;
-            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
         }
-        .date-inputs .form-group {
-            flex: 1;
-        }
-        .passenger-count {
-            display: flex;
-            gap: 15px;
-        }
-        .passenger-count .form-group {
-            flex: 1;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            margin-top: 2rem;
-        }
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .swap-btn {
-            display: block;
-            text-align: center;
-            margin: 10px 0;
-            color: #0056b3;
-            cursor: pointer;
-        }
-        .swap-btn:hover {
-            text-decoration: underline;
+
+        @media (max-width: 768px) {
+            .route-container {
+                margin: 0 20px;
+            }
+
+            .date-inputs,
+            .passenger-count {
+                grid-template-columns: 1fr;
+            }
+
+            .route-cards {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>BusConnect</h1>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    
-    <div class="progress-bar">
-        <div class="step active">
-            <div class="step-number">1</div>
-            <div class="step-label">Search</div>
-        </div>
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-label">Select Bus</div>
-        </div>
-        <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-label">Passenger Info</div>
-        </div>
-        <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-label">Select Seats</div>
-        </div>
-        <div class="step">
-            <div class="step-number">5</div>
-            <div class="step-label">Review</div>
-        </div>
-        <div class="step">
-            <div class="step-number">6</div>
-            <div class="step-label">Payment</div>
-        </div>
-        <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-label">Confirmation</div>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2 class="form-title">Choose Destination and Date</h2>
-        
-        <div class="alert-info">
-            Search for available buses by selecting your departure, destination, and travel dates.
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Search Routes</h1>
+            <p>Find the perfect bus route for your journey</p>
         </div>
+    </section>
+
+    <div class="route-container">
+        <div class="progress-bar">
+            <div class="step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Search</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-label">Select Bus</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-label">Passenger Info</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-label">Select Seats</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
+        <h2 class="form-title">Choose Your Route</h2>
         
         <form class="search-form">
             <div class="route-type">
@@ -363,7 +347,7 @@
             </div>
             
             <div class="buttons">
-                <button type="submit" class="btn">Search Buses</button>
+                <button type="submit" class="btn btn-primary">Search Buses</button>
             </div>
         </form>
         
@@ -397,9 +381,33 @@
             </div>
         </div>
     </div>
-    
+
     <footer>
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EasyBus</h3>
+                    <p>Making bus travel simple and comfortable.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <a href="/faq">FAQ</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EasyBus. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>

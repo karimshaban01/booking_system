@@ -3,284 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusConnect - Seat Selection</title>
+    <title>Select Seats - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .progress-bar {
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/seats-hero.jpg") center/cover;
+            height: 200px;
             display: flex;
-            justify-content: space-between;
-            margin: 1rem auto;
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-        .step {
+            align-items: center;
             text-align: center;
-            flex: 1;
-        }
-        .step-number {
-            background-color: #ddd;
-            color: #777;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
-            font-weight: bold;
-        }
-        .active .step-number {
-            background-color: #0056b3;
             color: white;
+            margin-bottom: 50px;
         }
-        .completed .step-number {
-            background-color: #28a745;
-            color: white;
-        }
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-        }
-        .container {
+
+        .seats-container {
             max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
+            margin: -50px auto 50px;
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
         }
-        .form-title {
-            margin-top: 0;
-            color: #0056b3;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-        .btn {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #003d82;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        .alert {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-        }
+
         .bus-layout {
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: #f8f9fa;
+            background-color: var(--light);
             border-radius: 8px;
-            border: 1px solid #dee2e6;
+            padding: 25px;
+            margin: 30px 0;
         }
+
+        .bus-front {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bus-door {
+            height: 30px;
+            width: 60px;
+            background-color: var(--gray);
+            margin: 0 auto;
+            border-radius: 4px;
+        }
+
         .bus-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 10px;
-            margin: 1rem 0;
+            margin: 20px 0;
         }
+
         .seat {
             text-align: center;
             padding: 10px 0;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
             transition: all 0.3s;
         }
+
         .seat-available {
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-            color: #495057;
+            background-color: white;
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
         }
+
         .seat-available:hover {
-            background-color: #bee5eb;
-            border-color: #0056b3;
+            border-color: var(--primary);
+            background-color: rgba(26, 115, 232, 0.04);
         }
+
         .seat-selected {
-            background-color: #28a745;
+            background-color: var(--secondary);
             color: white;
-            border: 1px solid #1e7e34;
+            border: 1px solid var(--secondary);
         }
+
         .seat-unavailable {
-            background-color: #dc3545;
-            color: white;
-            border: 1px solid #bd2130;
-            opacity: 0.7;
+            background-color: var(--light-gray);
+            color: var(--gray);
             cursor: not-allowed;
+            opacity: 0.7;
         }
+
         .seat-empty {
             background: none;
             border: none;
             cursor: default;
         }
+
         .driver-seat {
-            background-color: #6c757d;
+            background-color: var(--gray);
             color: white;
-            border: 1px solid #5a6268;
             cursor: default;
         }
+
         .legend {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin: 1rem 0;
+            margin: 20px 0;
         }
+
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
+
         .legend-color {
             width: 20px;
             height: 20px;
             border-radius: 4px;
         }
-        .legend-available {
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-        }
-        .legend-selected {
-            background-color: #28a745;
-            border: 1px solid #1e7e34;
-        }
-        .legend-unavailable {
-            background-color: #dc3545;
-            border: 1px solid #bd2130;
-            opacity: 0.7;
-        }
-        .bus-front {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-weight: bold;
-            color: #495057;
-        }
-        .bus-door {
-            height: 30px;
-            width: 60px;
-            background-color: #6c757d;
-            margin: 0 auto;
-            border-radius: 4px;
-        }
+
         .selected-seats {
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
+            background-color: var(--light);
             border-radius: 8px;
-            border: 1px solid #dee2e6;
+            padding: 25px;
+            margin-top: 30px;
         }
+
         .selected-seat-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #dee2e6;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
         }
-        .selected-seat-item:last-child {
-            border-bottom: none;
-        }
+
         .price-summary {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--light-gray);
         }
+
         .price-row {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 10px 0;
         }
+
         .price-total {
-            border-top: 2px solid #dee2e6;
-            font-weight: bold;
-            padding-top: 10px;
+            border-top: 2px solid var(--primary);
             margin-top: 10px;
+            padding-top: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            margin-top: 2rem;
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .seats-container {
+                margin: 0 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .legend {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>BusConnect</h1>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    
-    <div class="progress-bar">
-        <div class="step completed">
-            <div class="step-number">1</div>
-            <div class="step-label">Search</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">2</div>
-            <div class="step-label">Select Bus</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">3</div>
-            <div class="step-label">Passenger Info</div>
-        </div>
-        <div class="step active">
-            <div class="step-number">4</div>
-            <div class="step-label">Select Seats</div>
-        </div>
-        <div class="step">
-            <div class="step-number">5</div>
-            <div class="step-label">Review</div>
-        </div>
-        <div class="step">
-            <div class="step-number">6</div>
-            <div class="step-label">Payment</div>
-        </div>
-        <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-label">Confirmation</div>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2 class="form-title">Select Your Seats</h2>
-        
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Select Your Seats</h1>
+            <p>Choose your preferred seats for a comfortable journey</p>
+        </div>
+    </section>
+
+    <div class="seats-container">
+        <div class="progress-bar">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-label">Search</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">2</div>
+                <div class="step-label">Select Bus</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">3</div>
+                <div class="step-label">Passenger Info</div>
+            </div>
+            <div class="step active">
+                <div class="step-number">4</div>
+                <div class="step-label">Select Seats</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
         <div class="alert alert-info">
             Please select 2 seats from the bus layout below. Click on an available seat to select or deselect it.
         </div>
-        
+
         <div class="bus-layout">
             <div class="bus-front">
                 <p>FRONT</p>
@@ -387,13 +347,20 @@
         </div>
         
         <div class="buttons">
-            <button class="btn btn-secondary">Back</button>
-            <button class="btn">Continue to Review</button>
+            <a href="/passenger" class="btn btn-outline">Back</a>
+            <a href="/review" class="btn btn-primary">Continue to Review</a>
         </div>
     </div>
-    
+
     <footer>
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <!-- ... copy footer content from index.php ... -->
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EasyBus. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

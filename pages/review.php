@@ -3,243 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusConnect - Review Booking</title>
+    <title>Review Booking - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .progress-bar {
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/review-hero.jpg") center/cover;
+            height: 200px;
             display: flex;
-            justify-content: space-between;
-            margin: 1rem auto;
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-        .step {
+            align-items: center;
             text-align: center;
-            flex: 1;
-        }
-        .step-number {
-            background-color: #ddd;
-            color: #777;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
-            font-weight: bold;
-        }
-        .active .step-number {
-            background-color: #0056b3;
             color: white;
+            margin-bottom: 50px;
         }
-        .completed .step-number {
-            background-color: #28a745;
-            color: white;
-        }
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-        }
-        .container {
+
+        .review-container {
             max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+            margin: -50px auto 50px;
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
         }
-        .form-title {
-            margin-top: 0;
-            color: #0056b3;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+
+        .card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
         }
-        .btn {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #003d82;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .buttons {
+
+        .card-title {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            align-items: center;
         }
-        .card {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #dee2e6;
-        }
-        .card-title {
-            margin-top: 0;
-            color: #0056b3;
-            font-size: 1.25rem;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
+
         .bus-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 20px;
         }
+
         .detail-item {
-            margin-bottom: 0.5rem;
+            margin-bottom: 15px;
         }
+
         .detail-label {
-            font-weight: bold;
-            color: #495057;
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: 5px;
         }
+
         .passenger-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
+
         .passenger-item {
-            padding: 10px;
-            border-bottom: 1px solid #dee2e6;
+            padding: 15px;
+            border-bottom: 1px solid var(--light-gray);
         }
+
         .passenger-item:last-child {
             border-bottom: none;
         }
+
         .passenger-name {
-            font-weight: bold;
-        }
-        .seat-info {
-            color: #0056b3;
             font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
         }
+
+        .seat-info {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
         .price-summary {
-            margin-top: 1rem;
+            margin-top: 20px;
         }
+
         .price-row {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
         }
+
         .price-total {
-            border-top: 2px solid #dee2e6;
+            border-top: 2px solid var(--primary);
+            border-bottom: none;
             font-weight: bold;
-            padding-top: 10px;
-            margin-top: 10px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            padding-top: 15px;
         }
-        .alert {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .alert-warning {
-            color: #856404;
-            background-color: #fff3cd;
-            border-color: #ffeeba;
-        }
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border-color: #bee5eb;
-        }
+
         .checkbox-container {
-            margin: 1.5rem 0;
+            margin: 30px 0;
         }
+
         .checkbox-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 0.5rem;
+            margin-bottom: 15px;
         }
+
         .checkbox-item input {
             margin-top: 5px;
             margin-right: 10px;
         }
+
         .edit-link {
-            color: #0056b3;
+            color: var(--primary);
             text-decoration: none;
             font-size: 0.9rem;
-            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
+
         .edit-link:hover {
             text-decoration: underline;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            margin-top: 2rem;
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .review-container {
+                margin: 0 20px;
+            }
+
+            .bus-details {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>BusConnect</h1>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    
-    <div class="progress-bar">
-        <div class="step completed">
-            <div class="step-number">1</div>
-            <div class="step-label">Search</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">2</div>
-            <div class="step-label">Select Bus</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">3</div>
-            <div class="step-label">Passenger Info</div>
-        </div>
-        <div class="step completed">
-            <div class="step-number">4</div>
-            <div class="step-label">Select Seats</div>
-        </div>
-        <div class="step active">
-            <div class="step-number">5</div>
-            <div class="step-label">Review</div>
-        </div>
-        <div class="step">
-            <div class="step-number">6</div>
-            <div class="step-label">Payment</div>
-        </div>
-        <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-label">Confirmation</div>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2 class="form-title">Review Your Booking</h2>
-        
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Review Your Booking</h1>
+            <p>Please review all details before proceeding to payment</p>
+        </div>
+    </section>
+
+    <div class="review-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <!-- ... existing progress bar code ... -->
+        </div>
+
         <div class="alert alert-warning">
             Please carefully review all the booking details below before proceeding to payment.
         </div>
-        
+
+        <!-- Journey Details -->
         <div class="card">
-            <h3 class="card-title">Journey Details <a href="#" class="edit-link">Edit</a></h3>
+            <h3 class="card-title">
+                Journey Details 
+                <a href="#" class="edit-link">Edit</a>
+            </h3>
             <div class="bus-details">
                 <div class="detail-item">
                     <div class="detail-label">From:</div>
@@ -275,9 +237,13 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Passenger Details -->
         <div class="card">
-            <h3 class="card-title">Passenger Details <a href="#" class="edit-link">Edit</a></h3>
+            <h3 class="card-title">
+                Passenger Details
+                <a href="#" class="edit-link">Edit</a>
+            </h3>
             <ul class="passenger-list">
                 <li class="passenger-item">
                     <div class="passenger-name">John Smith</div>
@@ -289,9 +255,13 @@
                 </li>
             </ul>
         </div>
-        
+
+        <!-- Contact Information -->
         <div class="card">
-            <h3 class="card-title">Contact Information <a href="#" class="edit-link">Edit</a></h3>
+            <h3 class="card-title">
+                Contact Information
+                <a href="#" class="edit-link">Edit</a>
+            </h3>
             <div class="bus-details">
                 <div class="detail-item">
                     <div class="detail-label">Email:</div>
@@ -303,7 +273,8 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Price Details -->
         <div class="card">
             <h3 class="card-title">Price Details</h3>
             <div class="price-summary">
@@ -321,7 +292,8 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Terms Checkboxes -->
         <div class="checkbox-container">
             <div class="checkbox-item">
                 <input type="checkbox" id="terms">
@@ -332,19 +304,26 @@
                 <label for="info-correct">I confirm that all the information provided is correct and matches the ID documents that will be presented during travel</label>
             </div>
         </div>
-        
+
         <div class="alert alert-info">
             <strong>Note:</strong> Your booking is not confirmed until payment is successfully processed.
         </div>
-        
+
         <div class="buttons">
-            <button class="btn btn-secondary">Back</button>
-            <button class="btn">Proceed to Payment</button>
+            <a href="/seats" class="btn btn-outline">Back</a>
+            <a href="/payment" class="btn btn-primary">Proceed to Payment</a>
         </div>
     </div>
-    
+
     <footer>
-        <p>&copy; 2025 BusConnect. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <!-- ... copy footer content from index.php ... -->
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EasyBus. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

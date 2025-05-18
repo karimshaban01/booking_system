@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyBus - Select Ticket Type</title>
+    <title>Select Ticket Type - EasyBus</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         :root {
             --primary: #1a73e8;
@@ -134,11 +135,30 @@
             color: var(--dark);
         }
 
-        .journey-summary {
+        .sub-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url("../assets/images/ticket-hero.jpg") center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .ticket-container {
+            max-width: 1000px;
+            margin: -50px auto 50px;
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .journey-summary {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 25px;
             margin-bottom: 30px;
         }
 
@@ -163,8 +183,25 @@
         .journey-details {
             display: flex;
             align-items: center;
+            gap: 30px;
             position: relative;
-            margin-bottom: 20px;
+            margin: 20px 0;
+        }
+
+        .journey-point {
+            flex: 1;
+            text-align: center;
+        }
+
+        .journey-time {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .journey-location {
+            color: var(--gray);
         }
 
         .journey-details::before {
@@ -176,27 +213,6 @@
             height: 2px;
             background-color: var(--light-gray);
             z-index: 0;
-        }
-
-        .journey-point {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 120px;
-            position: relative;
-            z-index: 1;
-            background-color: white;
-        }
-
-        .journey-time {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .journey-location {
-            font-size: 14px;
-            color: var(--gray);
-            text-align: center;
         }
 
         .journey-arrow {
@@ -234,26 +250,26 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin: 30px 0;
         }
 
         .ticket-card {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
+            border: 2px solid var(--light-gray);
+            transition: all 0.3s;
             cursor: pointer;
         }
 
         .ticket-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .ticket-card.selected {
             border-color: var(--primary);
+            background-color: rgba(26, 115, 232, 0.04);
         }
 
         .ticket-header {
@@ -261,39 +277,36 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
         }
 
         .ticket-type {
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
         }
 
         .ticket-price {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--primary);
         }
 
         .ticket-features {
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .ticket-feature {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--gray);
         }
 
         .feature-icon {
-            margin-right: 10px;
             color: var(--secondary);
-        }
-
-        .ticket-description {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 20px;
+            margin-right: 10px;
         }
 
         .popular-badge {
@@ -301,11 +314,19 @@
             color: white;
             padding: 5px 10px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
-        .action-buttons {
+        .ticket-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
@@ -355,34 +376,23 @@
         }
 
         @media (max-width: 768px) {
+            .ticket-container {
+                margin: 0 20px;
+            }
+
             .journey-details {
                 flex-direction: column;
-                align-items: flex-start;
+                text-align: center;
             }
 
-            .journey-details::before {
-                display: none;
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
             }
 
-            .journey-point {
+            .btn {
                 width: 100%;
-                flex-direction: row;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
-
-            .journey-arrow {
-                transform: rotate(90deg);
-                margin: 10px 0;
-            }
-
-            .steps {
-                overflow-x: auto;
-                padding-bottom: 10px;
-            }
-
-            .step {
-                min-width: 120px;
+                text-align: center;
             }
         }
     </style>
@@ -392,13 +402,33 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Easy<span>Bus</span></a>
+                <a href="/" class="logo">Easy<span>Bus</span></a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/routes">Routes</a>
+                    <a href="/offers">Offers</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/auth/login" class="btn btn-outline">Sign In</a>
+                    <a href="/auth/register" class="btn btn-primary">Register</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Booking Progress -->
-    <div class="container">
+    <!-- Hero Section -->
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Select Your Ticket Type</h1>
+            <p>Choose the perfect ticket for your journey</p>
+        </div>
+    </section>
+
+    <!-- Ticket Selection Container -->
+    <div class="ticket-container">
+        <!-- Booking Progress -->
         <div class="booking-progress">
             <div class="steps">
                 <div class="step completed">
@@ -431,13 +461,10 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <main class="container">
-        <h1 class="page-title">Select Your Ticket Type</h1>
-        
         <!-- Journey Summary -->
         <div class="journey-summary">
+            <h3>Journey Details</h3>
             <div class="journey-header">
                 <div class="journey-title">Your Selected Trip</div>
                 <div class="journey-date">May 15, 2025</div>
@@ -551,15 +578,22 @@
         </div>
         
         <!-- Action Buttons -->
-        <div class="action-buttons">
-            <a href="step1.html" class="btn btn-outline">Back</a>
-            <a href="step3.html" class="btn btn-primary">Continue</a>
+        <div class="buttons">
+            <a href="/routes" class="btn btn-outline">Back</a>
+            <a href="/passenger" class="btn btn-primary">Continue</a>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EasyBus</h3>
+                    <p>Making bus travel simple and comfortable.</p>
+                </div>
+                <!-- ... rest of the footer content ... -->
+            </div>
             <div class="copyright">
                 <p>&copy; 2025 EasyBus. All rights reserved.</p>
             </div>
