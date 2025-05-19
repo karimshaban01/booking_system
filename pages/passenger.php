@@ -349,8 +349,8 @@
         </div>
         
         <div class="buttons">
-            <a href="/routes" class="btn btn-outline">Back</a>
-            <a href="/seats" class="btn btn-primary">Continue to Seat Selection</a>
+            <a href="./seats.php" class="btn btn-outline">Back</a>
+            <a href="./review.php" class="btn btn-primary">Continue to Review</a>
         </div>
     </div>
 
